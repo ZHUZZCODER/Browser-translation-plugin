@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ai翻译助手 - 设置</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🚀</span>
+                    <h1>ai翻译助手</h1>
+                </div>
+                <div class="version">v1.0.0</div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="settings-section">
+                <div class="section-header">
+                    <h2>🔑 API 配置</h2>
+                    <p>配置Kimi API密钥以启用翻译和总结功能</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="api-key">Kimi API 密钥</label>
+                    <div class="input-group">
+                        <input type="password" id="api-key" placeholder="请输入您的Kimi API密钥">
+                        <button type="button" id="toggle-visibility" class="toggle-btn" title="显示/隐藏密钥">
+                            👁️
+                        </button>
+                    </div>
+                    <div class="input-help">
+                        <p>
+                            获取API密钥：访问
+                            <a href="https://platform.moonshot.cn/console/api-keys" target="_blank">Kimi开放平台</a>
+                            申请API密钥
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" id="test-connection" class="test-btn">
+                        <span class="btn-icon">🔗</span>
+                        测试连接
+                    </button>
+                    <div id="connection-result" class="connection-result"></div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="section-header">
+                    <h2>🌐 翻译设置</h2>
+                    <p>配置默认翻译语言和其他翻译选项</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="default-target-language">默认目标语言</label>
+                    <select id="default-target-language" class="select-input">
+                        <option value="zh">中文</option>
+                        <option value="en">English</option>
+                        <option value="ja">日本語</option>
+                        <option value="ko">한국어</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="es">Español</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="auto-detect-language">
+                        <label for="auto-detect-language">自动检测源语言</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="show-original-text">
+                        <label for="show-original-text">翻译结果中显示原文</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="section-header">
+                    <h2>📝 总结设置</h2>
+                    <p>配置页面总结的相关选项</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="summary-length">总结长度</label>
+                    <select id="summary-length" class="select-input">
+                        <option value="short">简短 (100-200字)</option>
+                        <option value="medium">中等 (200-400字)</option>
+                        <option value="long">详细 (400-600字)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="include-key-points">
+                        <label for="include-key-points">包含关键要点列表</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="section-header">
+                    <h2>⚙️ 界面设置</h2>
+                    <p>个性化插件界面和交互方式</p>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="auto-open-sidepanel">
+                        <label for="auto-open-sidepanel">选中文本后自动打开侧边栏</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="show-floating-button">
+                        <label for="show-floating-button">显示页面浮动按钮</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions-section">
+                <button type="button" id="save-settings" class="save-btn">
+                    <span class="btn-icon">💾</span>
+                    保存设置
+                </button>
+
+                <button type="button" id="reset-settings" class="reset-btn">
+                    <span class="btn-icon">🔄</span>
+                    重置为默认
+                </button>
+            </div>
+
+            <div id="save-status" class="save-status"></div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://platform.moonshot.cn/docs" target="_blank">📖 API文档</a>
+                    <a href="https://github.com/your-repo" target="_blank">📝 使用说明</a>
+                    <a href="mailto:support@example.com">✉️ 问题反馈</a>
+                </div>
+                <div class="footer-info">
+                    <p>Powered by Kimi API | Made with ❤️</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>

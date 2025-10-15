@@ -1,0 +1,15 @@
+#kimi-translate-btn {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+#kimi-translate-btn:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 16px rgba(79, 172, 254, 0.6) !important;
+}
+
+#kimi-translate-btn:active {
+  transform: scale(0.95) !important;
+}

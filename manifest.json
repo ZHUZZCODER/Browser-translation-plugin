@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "ai翻译助手",
+  "version": "1.0.0",
+  "description": "基于Kimi API的智能翻译和页面总结Chrome扩展插件",
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "sidePanel",
+    "tabs"
+  ],
+
+  "host_permissions": [
+    "https://api.moonshot.cn/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ai翻译助手"
+  },
+
+  "options_page": "options.html",
+
+  "web_accessible_resources": [
+    {
+      "resources": ["sidepanel.html", "sidepanel.css", "sidepanel.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

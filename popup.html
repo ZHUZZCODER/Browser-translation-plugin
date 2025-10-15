@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ai翻译助手</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 300px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .popup-container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            padding: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .status {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 15px;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .online {
+            background: #4caf50;
+        }
+
+        .offline {
+            background: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-container">
+        <div class="logo">🚀</div>
+        <div class="title">ai翻译助手</div>
+        <div class="subtitle">智能翻译 · 内容总结</div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" id="open-sidepanel">
+                <span>📋</span>
+                打开侧边栏
+            </button>
+
+            <button class="btn btn-secondary" id="open-settings">
+                <span>⚙️</span>
+                设置
+            </button>
+        </div>
+
+        <div class="status">
+            <span class="status-dot" id="status-indicator"></span>
+            <span id="status-text">检查连接中...</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const openSidepanelBtn = document.getElementById('open-sidepanel');
+            const openSettingsBtn = document.getElementById('open-settings');
+            const statusIndicator = document.getElementById('status-indicator');
+            const statusText = document.getElementById('status-text');
+
+            // 打开侧边栏
+            openSidepanelBtn.addEventListener('click', async () => {
+                try {
+                    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+                    await chrome.sidePanel.open({ tabId: tab.id });
+                    window.close();
+                } catch (error) {
+                    console.error('打开侧边栏失败:', error);
+                }
+            });
+
+            // 打开设置页面
+            openSettingsBtn.addEventListener('click', () => {
+                chrome.runtime.openOptionsPage();
+                window.close();
+            });
+
+            // 检查连接状态
+            try {
+                const response = await chrome.runtime.sendMessage({ action: 'testApiConnection' });
+                if (response.connected) {
+                    statusIndicator.className = 'status-dot online';
+                    statusText.textContent = 'API已连接';
+                } else {
+                    statusIndicator.className = 'status-dot offline';
+                    statusText.textContent = '需要配置API';
+                }
+            } catch (error) {
+                statusIndicator.className = 'status-dot offline';
+                statusText.textContent = '连接检查失败';
+            }
+        });
+    </script>
+</body>
+</html>
